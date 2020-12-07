@@ -1,58 +1,60 @@
 import { state } from '@angular/animations';
-import { Item } from '../../models/item.model';
+import { Item } from 'src/app/models/item.model';
 import * as fromItems from '../actions/items.action';
 
 export interface ItemState {
-    entities: { [id: number]: Item };
-    loaded: boolean;
-    loading: boolean;
+  entities: { [id: number]: Item };
+  loaded: boolean;
+  loading: boolean;
 }
 
 export const initialState: ItemState = {
-    entities: {},
-    loaded: false,
-    loading: false
+  entities: {},
+  loaded: false,
+  loading: false,
 };
 
 export function reducer(
-    state = initialState,
-    action: fromItems.ItemsAction
+  state = initialState,
+  action: fromItems.ItemsAction
 ): ItemState {
-    switch (action.type) {
-        case fromItems.LOAD_ITEMS: {
-            return {
-                ...state,
-                loading: true,
-                loaded: false
-            };
-        }
-        case fromItems.LOAD_ITEMS_SUCCESS: {
-            const items = action.payload;
-            const entities = items.reduce(
-                (entities: { [id: number]: Item }, item) => {
-                    return {
-                        ...entities,
-                        [item.itemId]: item
-                    }
-                }, {
-                ...state.entities
-            })
-            return {
-                ...state,
-                loading: false,
-                loaded: true,
-                entities
-            };
-        }
-        case fromItems.LOAD_ITEMS_FAIL: {
-            return {
-                ...state,
-                loading: false,
-                loaded: false
-            };
-        }
+  switch (action.type) {
+    case fromItems.LOAD_ITEMS: {
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+      };
     }
-    return state;
+    case fromItems.LOAD_ITEMS_FAIL: {
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+      };
+    }
+    case fromItems.LOAD_ITEMS_SUCCESS: {
+      const items = action.payload;
+      const entities = items.reduce(
+        (entities: { [id: number]: Item }, item) => {
+          return {
+            ...entities,
+            [item.itemId]: item,
+          };
+        },
+        {
+          ...state.entities,
+        }
+      );
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        entities,
+      };
+    }
+  }
+  return state;
 }
 
 export const getItemsEntities = (state: ItemState) => state.entities;

@@ -1,5 +1,6 @@
 import { ItemsEffects } from './items.effect';
-
-export const effects: any[] = [ItemsEffects];
+import { OrdersEffect } from './orders.effect';
+export const effects: any[] = [ItemsEffects, OrdersEffect];
 
 export * from './items.effect';
+export * from './orders.effect';

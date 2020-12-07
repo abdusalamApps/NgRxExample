@@ -22,6 +22,7 @@ import { environment } from 'src/environments/environment';
     components.ItemsComponent,
     components.LoginComponent,
     components.ItemDetailsComponent,
+    components.OrdersComponent,
   ],
   imports: [
     CommonModule,

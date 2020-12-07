@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'items', component: components.ItemsComponent },
   { path: 'new', component: components.ItemDetailsComponent },
   { path: 'items/:itemId', component: components.ItemDetailsComponent },
+  { path: 'orders', component: components.OrdersComponent },
 ];
 
 @NgModule({

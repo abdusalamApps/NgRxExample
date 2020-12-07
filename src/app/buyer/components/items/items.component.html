@@ -1,5 +1,6 @@
+<mat-spinner class="spinner" color="accent" *ngIf="loading$ | async">
+</mat-spinner>
 <div class="container">
-  <mat-spinner color="accent" *ngIf="loading$ | async"> </mat-spinner>
   <mat-card *ngIf="!(loading$ | async)">
     <mat-list>
       <mat-list-item
